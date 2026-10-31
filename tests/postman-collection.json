@@ -1,31 +1,149 @@
 {
-	"info": {
-		"_postman_id": "94e5168c-bdf4-4c00-b873-26a1a9368165",
-		"name": "postman_collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "414713"
-	},
-	"item": [
-		{
-			"name": "obter alunos",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/alunos",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"alunos"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "cfcaed3a-5f22-4dd2-a45c-300e52858c43",
+    "name": "postman_collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59374999",
+    "_collection_link": "https://go.postman.co/collection/59374999-cfcaed3a-5f22-4dd2-a45c-300e52858c43?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "obter alunos",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/alunos",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "alunos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "obter aluno",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/alunos/1",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "alunos",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "adicionar aluno",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/alunos",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "alunos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "editar aluno",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "   { \"nome\": \"Editado\", \"apelido\": \"Postman\", \"idCurso\": 2, \"anoCurricular\": 2, \"idade\": 21 }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/alunos/11",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "alunos",
+            "11"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "apagar aluno",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/alunos/11",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "alunos",
+            "11"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "obter cursos",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:3000/cursos",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "cursos"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }
