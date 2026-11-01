@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const conectarBD = require("./config/db");
 const cursoRoutes = require("./routes/cursoRoutes");
+const alunoRoutes = require("./routes/alunoRoutes");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/cursos", cursoRoutes);
+app.use("/alunos", alunoRoutes);
 
 // Rota inexistente
 app.use((req, res) => {
