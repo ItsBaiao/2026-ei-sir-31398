@@ -72,6 +72,10 @@ function mostrarAlunos(alunos) {
     const tdAcoes = document.createElement("td");
 
     // BLOCO 3 (botão Editar) entra aqui
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "Editar";
+    btnEditar.addEventListener("click", () => prepararEdicao(aluno));
+    tdAcoes.appendChild(btnEditar);
 
     // BLOCO 2 (botão Apagar) entra aqui
     const btnApagar = document.createElement("button");
@@ -100,7 +104,61 @@ async function apagarAluno(aluno) {
   }
 }
 
-// BLOCO 3 (funções novas) entram aqui
+// ---------- Adicionar e editar aluno ----------
+function prepararEdicao(aluno) {
+  inputId.value = aluno.id;
+  inputNome.value = aluno.nome;
+  inputApelido.value = aluno.apelido;
+  selectCurso.value = aluno.idCurso;
+  inputAno.value = aluno.anoCurricular;
+  inputIdade.value = aluno.idade;
+
+  formTitulo.textContent = "Editar aluno";
+  btnGuardar.textContent = "Guardar alterações";
+  btnCancelar.hidden = false;
+  form.scrollIntoView({ behavior: "smooth" });
+}
+
+function limparFormulario() {
+  form.reset();
+  inputId.value = "";
+  formTitulo.textContent = "Adicionar aluno";
+  btnGuardar.textContent = "Adicionar";
+  btnCancelar.hidden = true;
+}
+
+form.addEventListener("submit", async (evento) => {
+  evento.preventDefault();
+
+  const aluno = {
+    nome: inputNome.value.trim(),
+    apelido: inputApelido.value.trim(),
+    idCurso: Number(selectCurso.value),
+    anoCurricular: Number(inputAno.value),
+    idade: Number(inputIdade.value)
+  };
+
+  const id = inputId.value;
+  const url = id ? `${API_URL}/alunos/${id}` : `${API_URL}/alunos`;
+  const metodo = id ? "PUT" : "POST";
+
+  try {
+    const resposta = await fetch(url, {
+      method: metodo,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(aluno)
+    });
+    if (!resposta.ok) throw new Error(`Erro ${resposta.status}`);
+
+    mostrarMensagem(id ? "Aluno atualizado." : "Aluno adicionado.");
+    limparFormulario();
+    await carregarAlunos();
+  } catch (erro) {
+    mostrarMensagem(`Não foi possível guardar o aluno (${erro.message}).`, true);
+  }
+});
+
+btnCancelar.addEventListener("click", limparFormulario);
 
 // ---------- Arranque ----------
 async function iniciar() {
