@@ -74,6 +74,11 @@ function mostrarAlunos(alunos) {
     // BLOCO 3 (botão Editar) entra aqui
 
     // BLOCO 2 (botão Apagar) entra aqui
+    const btnApagar = document.createElement("button");
+    btnApagar.textContent = "Apagar";
+    btnApagar.className = "perigo";
+    btnApagar.addEventListener("click", () => apagarAluno(aluno));
+    tdAcoes.appendChild(btnApagar);
 
     tr.appendChild(tdAcoes);
     tabela.appendChild(tr);
@@ -81,6 +86,21 @@ function mostrarAlunos(alunos) {
 }
 
 // BLOCOS 2 e 3 (funções novas) entram aqui, acima de iniciar()
+// ---------- Apagar aluno ----------
+async function apagarAluno(aluno) {
+  if (!confirm(`Apagar o aluno ${aluno.nome} ${aluno.apelido}?`)) return;
+
+  try {
+    const resposta = await fetch(`${API_URL}/alunos/${aluno.id}`, { method: "DELETE" });
+    if (!resposta.ok) throw new Error(`Erro ${resposta.status}`);
+    mostrarMensagem("Aluno apagado.");
+    await carregarAlunos();
+  } catch (erro) {
+    mostrarMensagem(`Não foi possível apagar o aluno (${erro.message}).`, true);
+  }
+}
+
+// BLOCO 3 (funções novas) entram aqui
 
 // ---------- Arranque ----------
 async function iniciar() {
