@@ -1,7 +1,7 @@
 // JS para operações CRUD com Fetch API
 
 // URL base da API. Na Parte 5 só vais precisar de mudar esta linha.
-const API_URL = "http://localhost:3000";
+const API_URL = "https://two026-ei-sir-31398.onrender.com";
 
 // Lista de cursos em memória (para mostrar o nome do curso em vez do número).
 let cursos = [];
@@ -38,7 +38,7 @@ async function carregarCursos() {
 }
 
 function nomeDoCurso(idCurso) {
-  const curso = cursos.find(c => c.id === idCurso);
+  const curso = cursos.find(c => String(c.id) === String(idCurso));
   return curso ? curso.nomeDoCurso : "Sem curso";
 }
 
@@ -133,7 +133,7 @@ form.addEventListener("submit", async (evento) => {
   const aluno = {
     nome: inputNome.value.trim(),
     apelido: inputApelido.value.trim(),
-    idCurso: Number(selectCurso.value),
+    idCurso: selectCurso.value,
     anoCurricular: Number(inputAno.value),
     idade: Number(inputIdade.value)
   };
@@ -162,9 +162,11 @@ btnCancelar.addEventListener("click", limparFormulario);
 
 // ---------- Arranque ----------
 async function iniciar() {
+  mostrarMensagem("A ligar à API (a primeira vez pode demorar até 1 minuto)...");
   try {
     await carregarCursos();
     await carregarAlunos();
+    mostrarMensagem("");
   } catch (erro) {
     mostrarMensagem(`Não foi possível ligar à API (${erro.message}). O servidor está a correr?`, true);
   }
