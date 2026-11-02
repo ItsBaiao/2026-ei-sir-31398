@@ -12,8 +12,13 @@ const app = express();
 app.use(cors());          // permite que o front-end (outro endereço) chame esta API
 app.use(express.json());  // lê o corpo dos pedidos em JSON
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./docs/swagger");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.get("/", (req, res) => {
-  res.json({ mensagem: "API de Alunos a funcionar" });
+  res.json({ mensagem: "API de Alunos a funcionar", documentacao: "/api-docs" });
 });
 
 app.use("/cursos", cursoRoutes);
